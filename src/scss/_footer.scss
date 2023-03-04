@@ -1,0 +1,14 @@
+
+.footer{
+    background: url(../assects/images/footerbackground.jpg);
+
+    ul{
+        list-style: none;
+        li{
+          a:hover{
+            color: blue !important;
+            transition: 0.9s;
+          }
+        }
+    }
+}

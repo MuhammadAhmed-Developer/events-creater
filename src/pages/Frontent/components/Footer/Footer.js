@@ -40,7 +40,7 @@ export default function Footer() {
      <div className="container">
        <div className="row mt-5">
          <hr />
-         <p className='mb-0 text-center'>&copy; {year} All Right Reserved By 💛 Muhammad Ahmed </p>
+         <p className='mb-0 text-center fw-bold'>&copy; {year} All Right Reserved By 💛 Muhammad Ahmed </p>
        </div>
      </div>
     </div>

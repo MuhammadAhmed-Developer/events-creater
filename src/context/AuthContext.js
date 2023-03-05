@@ -2,9 +2,9 @@ import React, {createContext, useReducer} from 'react';
 
 export const AuthContext = createContext()
 
-const initialState = {isAuthentication: false}
+const initialState = {isAuthentication: true}
 const reducer = ((state, action)=>{
-switch(action.type){
+switch (action.type){
  case "LOGIN":
  return {isAuthentication: true}
  case "LOGOUT":

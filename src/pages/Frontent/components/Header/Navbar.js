@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
+import { AuthContext } from '../../../../context/AuthContext';
 import logo from '../../../../assects/images/logo192.png';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../../context/AuthContext';
 
 export default function Navbar() {
 
-  //  const {state} = useContext(AuthContext)
+   const {state} = useContext(AuthContext)
 
-  //  const {IsAuthenticated} = state
+   const {isAuthentication} = state
   
 
   return (
@@ -30,16 +30,16 @@ export default function Navbar() {
           <Link to='/contact' className="nav-link me-4" href="#">Contact</Link>
         </li>
         <li className="nav-item ">
-          {!IsAuthenticated ? 
+          {!isAuthentication ?  <></>
+          : 
           <Link to='/my-events' className="nav-link me-4 " href="#">My Events</Link>
-          :
-          <></>
+         
         }
 
         </li>
       </ul>
       <div className="d-flex" role="search">
-        {!IsAuthenticated ? 
+        {!isAuthentication ? 
          <Link to='/signup' className="btn btn-outline-light p-3 rounded-0"> Sign Up Now</Link>
          :
          <button className='btn btn-outline-light p-3 rounded-0'>Log Out</button> 

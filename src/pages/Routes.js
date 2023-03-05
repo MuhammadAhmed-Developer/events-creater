@@ -1,7 +1,7 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Frontend from './Frontent'
-import Footer from './Frontent/components/Footer/Footer'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Frontend from './Frontent';
+import Authentication from './Authentication';
 
 export default function index() {
   return (
@@ -9,6 +9,7 @@ export default function index() {
     <BrowserRouter>
      <Routes>
         <Route path='/*' element={<Frontend/>}/>
+        <Route path='/authentication/*' element={<Authentication/>} />
      </Routes>
     </BrowserRouter>
     

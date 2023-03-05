@@ -1,20 +1,53 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../context/AuthContext';
 import logo from '../../../../assects/images/logo192.png';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
 
-   const {state} = useContext(AuthContext)
+
+  const [bgColor, setBgColor] = useState('')
+  const [transition, setTransition] = useState('')
+
+
+  const handleScroll = () =>{
+    const position = window.pageYOffset;
+    if(position > 100){
+     setBgColor ('black')
+     setTransition('1s')
+    }else{
+      setBgColor('transparent')
+      
+    }
+  };
+
+  useEffect(()=>{
+    window.addEventListener('scroll', handleScroll, {position: true})
+
+    return ()=>{
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+
+
+   const {state, dispatch} = useContext(AuthContext)
 
    const {isAuthentication} = state
   
 
+   const handleLogout = () =>{
+    
+    dispatch({type: 'LOGOUT'})
+
+
+   }
+
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+      <nav style={{backgroundColor: bgColor, transition: transition }} className="navbar  navbar-expand-lg  navbar-dark fixed-top">
   <div className="container">
-    <Link to='/' className="navbar-brand"><img src={logo} alt="logo" className='img-fluid logo-img mb-1' /><span className='fw-bolder fs-3 ms-2'>Wemeet</span></Link>
+    <Link to='/' className="navbar-brand"><img src={logo} alt="logo" className='img-fluid logo-img mb-3' /><span className='fw-bolder fs-2 ms-2'>Wemeet</span></Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -32,7 +65,7 @@ export default function Navbar() {
         <li className="nav-item ">
           {!isAuthentication ?  <></>
           : 
-          <Link to='/my-events' className="nav-link me-4 " href="#">My Events</Link>
+          <Link to='/myevents' className="nav-link me-4 " href="#">My Events</Link>
          
         }
 
@@ -40,9 +73,9 @@ export default function Navbar() {
       </ul>
       <div className="d-flex" role="search">
         {!isAuthentication ? 
-         <Link to='/signup' className="btn btn-outline-light p-3 rounded-0"> Sign Up Now</Link>
+         <Link to='/signup' className="btn btn-outline-light py-3 px-4 rounded-0"> Sign Up Now</Link>
          :
-         <button className='btn btn-outline-light p-3 rounded-0'>Log Out</button> 
+         <button className='btn btn-outline-light px-5 py-3 rounded-0' onClick={handleLogout}>Log Out</button> 
       }
         
       </div>

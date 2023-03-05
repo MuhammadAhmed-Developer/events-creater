@@ -1,0 +1,27 @@
+
+
+.digital-event{
+    font-size: 80px;
+    font-weight: bolder;
+}
+
+.hero-background{
+  background: url(../assects/images/hero-background.jpg) !important;
+}
+.register{
+  background: #b92b27;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #1565C0, #b92b27);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1565C0, #b92b27); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+// .circle{
+//   margin-right: 50px;
+// }
+
+@media screen and (max-width: 580px) {
+ 
+.digital-event{
+  font-size: 50px;
+
+}
+}

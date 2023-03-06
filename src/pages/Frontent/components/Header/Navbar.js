@@ -73,7 +73,7 @@ export default function Navbar() {
       </ul>
       <div className="d-flex" role="search">
         {!isAuthentication ? 
-         <Link to='/signup' className="btn btn-outline-light py-3 px-4 rounded-0"> Sign Up Now</Link>
+         <Link to='/authentication/signup' className="btn btn-outline-light py-3 px-4 rounded-0"> Sign Up Now</Link>
          :
          <button className='btn btn-outline-light px-5 py-3 rounded-0' onClick={handleLogout}>Log Out</button> 
       }

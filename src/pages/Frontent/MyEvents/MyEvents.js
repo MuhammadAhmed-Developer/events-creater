@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+const initialstate ={
+  description:'',
+  title:'',
+  location:'',
+  time:'',
+  date:'',
+}
+
 export default function Contact() {
+
+const [state, setState] = useState(initialstate)
+const [isProcessing, setIsProcesssing] = useState(false)
+
+const handleChange = (e) => {
+   setState(s=>({...s,[e.target.name]: e.target.value}))
+}
+
+const handleSubmit = (e) =>{
+  e.preventDefault()
+  console.log(state)
+}
+
   return (
     <>
     <div>
@@ -16,38 +37,44 @@ export default function Contact() {
               <br />
               <div className=' text-center text-md-center text-lg-start'>
 
-              <Link className='btn btn-outline-light py-2 px-3 rounded-0'>Go To Events</Link>
+              <Link to='/events' className='btn btn-outline-light py-2 px-3 rounded-0'>Go To Events</Link>
               </div>
             </div>
             <div className="col-lg-8 col-md-12 col-sm-12 mt-5">
-              <div class="card bg-secondary">
-                <div class="card-body">
+              <div className="card bg-secondary">
+                <div className="card-body">
                   <h1 className='text-center mb-3'>Add Events</h1>
-                  <div className="row mb-3">
+                 <form onSubmit={handleSubmit}>
+                 <div className="row mb-3">
                     <div className="col">
-                      <textarea name=""  className='form-control'  placeholder='Description'></textarea>
+                      <textarea name="description"  className='form-control'  placeholder='Description' onChange={handleChange}></textarea>
                     </div>
                   </div>
                   <div className="row mb-3">
                     <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
-                      <input type="text" name="" className='form-control' placeholder='Enter Title' />
+                      <input type="text" name="title" className='form-control' placeholder='Enter Title'  onChange={handleChange} />
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">
-                      <input type="text" name="" className='form-control' placeholder='Location' />
+                      <input type="text" name="location" className='form-control' placeholder='Location'  onChange={handleChange} />
                     </div>
                   </div>
                   <div className="row mb-3">
                     <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
-                      <input type="time" className='form-control ' placeholder='00' />
+                      <input type="time" name='time' className='form-control ' placeholder='00'  onChange={handleChange} />
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">
-                      <input type="date" className='form-control ' placeholder='' />
+                      <input type="date" name='date' className='form-control ' placeholder=''  onChange={handleChange}/>
                     </div>
                   </div>
                   <div className='text-center'>
 
-                  <a href="#" class="btn btn-primary w-50 ">Add Event</a>
+                  <button className="btn btn-warning w-50 " disabled={isProcessing}>
+                  {!isProcessing ?
+                  'Add Event'  : <div className='text-white spinner-grow spinner-grow-sm'></div>}
+                  
+                  </button>
                   </div>
+                 </form>
                 </div>
               </div>
             </div>

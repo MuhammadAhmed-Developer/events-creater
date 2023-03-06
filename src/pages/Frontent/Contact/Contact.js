@@ -1,7 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+
+const initialstate = {
+  query:'',
+  name:'',
+  email:'',
+  subject:'',
+}
+
 export default function Contact() {
+ 
+
+  const [state, setState] = useState(initialstate)
+
+  const handleChange = (e) =>{
+    setState(s=>({...s,[e.target.name]:e.target.value}))
+  }
+
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    console.log(state)
+   window.notify("Workin", "success")
+  }
+
   return (
     <div>
       <div className="container-fluid hero-background bg-warning text-white p-5">
@@ -15,35 +37,37 @@ export default function Contact() {
               <br />
               <div className=' text-center text-lg-start'>
 
-              <Link className='btn btn-outline-light py-2 px-3 rounded-0'>Go To Events</Link>
+              <Link to='/events' className='btn btn-outline-light py-2 px-3 rounded-0'>Go To Events</Link>
               </div>
             </div>
             <div className="col-lg-8 col-md-12 col-sm-12 mt-5">
-              <div class="card bg-dark">
-                <div class="card-body">
+              <div className="card bg-dark">
+                <div className="card-body">
                   <h1>In Touch</h1>
+                  <form onSubmit={handleSubmit}>
                   <div className="row mb-3">
                     <div className="col">
-                      <textarea name=""  className='form-control'  placeholder='Your Query'></textarea>
+                      <textarea name="query"  className='form-control'  placeholder='Your Query' onChange={handleChange}></textarea>
                     </div>
                   </div>
                   <div className="row mb-3">
                     <div className="col-lg-6 col-md-6 col-sm-12 mb-2">
-                      <input type="text" name="" className='form-control' placeholder='Enter Your Name' />
+                      <input type="text" name="name" className='form-control' placeholder='Enter Your Name' onChange={handleChange}  />
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12 mt-sm-3 mt-lg-0 mt-md-0">
-                      <input type="email" name="" className='form-control' placeholder='Enter Your Email' />
+                      <input type="email" name="email" className='form-control' placeholder='Enter Your Email' onChange={handleChange} />
                     </div>
                   </div>
                   <div className="row mb-3">
                     <div className="col">
-                      <input type="text" className='form-control ' placeholder='Subject' />
+                      <input type="text" name='subject' className='form-control ' placeholder='Subject' onChange={handleChange} />
                     </div>
                   </div>
                   <div className='text-center'>
 
-                  <a href="#" class="btn btn-info w-50 ">Send</a>
+                  <button className="btn btn-info w-50 ">Send</button>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>

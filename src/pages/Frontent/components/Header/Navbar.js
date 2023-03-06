@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../context/AuthContext';
 import logo from '../../../../assects/images/logo192.png';
 import { Link } from 'react-router-dom';
+import { auth } from '../../../../Config/firebase';
+import { signOut } from 'firebase/auth';
 
 export default function Navbar() {
 
@@ -37,7 +39,14 @@ export default function Navbar() {
 
    const handleLogout = () =>{
     
-    dispatch({type: 'LOGOUT'})
+    signOut(auth)
+    .then(()=>{
+      dispatch({type: 'LOGOUT'})
+    })
+      .catch((err)=>{
+      console.log(err)
+    })
+    
 
 
    }
@@ -64,7 +73,7 @@ export default function Navbar() {
         <li className="nav-item ">
           {!isAuthentication ?  <></>
           : 
-          <Link to='/myevents' className="nav-link me-4 " href="#">My Events</Link>
+          <Link to='/myevents' className="nav-link me-4 ">My Events</Link>
          
         }
 

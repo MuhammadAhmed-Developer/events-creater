@@ -30,9 +30,9 @@ const handleSubmit = (e) =>{
         
         <div className="container p-lg-5 p-sm-2 p-md-4">
           <div className="row mt-5">
-            <div className="col-lg-4 col-md-12 col-sm-12 mt-5">
-              <h1 className='digital-event text-center text-lg-start'>Your Events<br />
-              </h1>
+            <div className="col-lg-4 col-md-12 col-sm-12 mt-5 d-flex flex-column align-items-center justify-content-center">
+              <h6 className='digital-event text-center fs-1 text-lg-start'>Your Events <a href="#yourEvents " className='fs-1 text-decoration-none'>🔰</a> <br />
+              </h6>
               <br />
               <br />
               <div className=' text-center text-md-center text-lg-start'>
@@ -82,10 +82,10 @@ const handleSubmit = (e) =>{
         </div>
       </div>
     </div>
-    <div className="container">
+    <div className="container" >
       <div className="row">
         <div className="col">
-           <h1 className='text-center fw-bold text-warning'>Your Events</h1>
+           <h1 className='text-center fw-bold text-warning' id='yourEvents'>Your Events</h1>
         </div>
       </div>
     </div>

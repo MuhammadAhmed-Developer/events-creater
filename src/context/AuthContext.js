@@ -4,7 +4,7 @@ import { auth } from '../Config/firebase';
 
 export const AuthContext = createContext()
 
-const initialState = {isAuthentication: true}
+const initialState = {isAuthentication: false}
 const reducer = ((state, action)=>{
 switch (action.type){
  case "LOGIN":

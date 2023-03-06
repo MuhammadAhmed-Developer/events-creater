@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import eventsection from '../../../assects/images/company-event.png';
+import { AuthContext } from '../../../context/AuthContext';
 export default function Events() {
+  const {isAuthentication} = useContext(AuthContext)
   return (
     <>
       <div>
@@ -15,8 +17,8 @@ export default function Events() {
                 <br />
                 <br />
                 <div className=' text-center text-lg-start'>
-
-                  <Link to='/myevents' className='btn btn-outline-light py-3 px-4 rounded-0'>Add Your Event</Link>
+                  {!isAuthentication ?  <></> : 
+                <Link to='/myevents' className='btn btn-outline-light py-3 px-4 rounded-0'>Add Your Event</Link>}
                 </div>
 
 

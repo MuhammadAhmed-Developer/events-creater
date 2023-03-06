@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate} from 'react-router-dom';
+import { auth } from '../../../Config/firebase';
+import { AuthContext } from '../../../context/AuthContext';
 
 
 const initialstate = {
@@ -9,6 +12,8 @@ const initialstate = {
 
 export default function SignIn() {
 
+  const {dispatch} =  useContext(AuthContext)
+  const navigate = useNavigate()
   const [state, setState] = useState(initialstate)
 const [isProcessing, setIsProcesssing] = useState(false)
   const handleChange = (e) =>{
@@ -17,7 +22,26 @@ const [isProcessing, setIsProcesssing] = useState(false)
 
   const handleSubmit = (e) =>{
    e.preventDefault()
-   console.log(state)
+   const {email, passward} = state
+   setIsProcesssing(true)
+   signInWithEmailAndPassword(auth, email, passward)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user)
+    dispatch({type:"LOGIN", payload:{user}})
+navigate('/')
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    window.notify('You are not currently Sing Up Please Sign Up!', 'error')
+  }).finally(()=>{
+    setIsProcesssing(false)
+
+  })
+  setIsProcesssing(true)
   }
 
   return (
@@ -47,7 +71,8 @@ const [isProcessing, setIsProcesssing] = useState(false)
                <div className="row mb-4">
                 <div className="col">
                   <button className='btn btn-warning w-100' disabled={isProcessing} > 
-                  {!isProcessing ? 'Sign In' : <div className='spinner-border spinner-border-sm'></div>}
+                  {!isProcessing ? 'Sign In' : 
+                  <div className='spinner-border spinner-border-sm'></div>}
                    </button>
                 </div>
                </div>

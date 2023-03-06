@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import {auth} from '../../../Config/firebase'
+import { firestore } from '../../../Config/firebase'
+import { doc, setDoc } from 'firebase/firestore/lite'
 
 
 const initialstate = {
   displayName:'',
   email:'',
-  passward:'',
+  password:'',
 }
 
 export default function SignUp() {
 
 
+  const navigate = useNavigate()
   const[state, setState] = useState(initialstate)
   const [isProcessing, setIsProcesssing] = useState(false)
 
@@ -21,6 +26,46 @@ export default function SignUp() {
   const handleSubmit= (e) =>{
     e.preventDefault()
     console.log(state)
+
+    const {email, password} = state
+
+    setIsProcesssing(true)
+
+    createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    addProfile(user)
+    console.log(user)
+    console.log("User Created")
+    // ...
+    navigate('/')
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    window.notify("Something went wrong", 'error')
+    setIsProcesssing(false)
+    // ..
+  });
+
+  const addProfile= async (user)=>{
+    try{
+      await setDoc(doc(firestore, "users", user.uid), {
+        name: state.displayName,
+        email,
+        uid: user.uid
+      });
+      console.log('user Document created at firestore' )
+    }catch(err){
+       console.log(err)
+       window.notify("Something went wrong", 'error')
+    
+  }
+  setIsProcesssing(false)
+  }
+    
+
   }
   
   return (
@@ -49,8 +94,8 @@ export default function SignUp() {
                </div>
                <div className="row mb-4">
                 <div className="col">
-                   <label htmlFor="password">Passward</label>
-                  <input type="password" className='form-control' placeholder='Enter Your Passward'  name='passward' onChange={handleChange}/>
+                   <label htmlFor="password">password</label>
+                  <input type="password" className='form-control' placeholder='Enter Your password'  name='password' onChange={handleChange}/>
                 </div>
                </div>
                <div className="row mb-4">
@@ -74,5 +119,5 @@ export default function SignUp() {
        </div>
     </div>
   )
-  
+
 }

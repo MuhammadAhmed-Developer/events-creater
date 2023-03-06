@@ -1,15 +1,23 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useContext } from 'react'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Frontend from './Frontent';
 import Authentication from './Authentication';
+import PrivateRoute from '../Config/PrivateRoute';
+import MyEvents from './Frontent/MyEvents'
+import { AuthContext } from '../context/AuthContext';
+import Header from "./Frontent/components/Header";
 
-export default function index() {
+export default function Index() {
+
+  const isAuthentication = useContext(AuthContext)
   return (
     <>
     <BrowserRouter>
+        <Header/>
      <Routes>
         <Route path='/*' element={<Frontend/>}/>
-        <Route path='/authentication/*' element={<Authentication/>} />
+        <Route path='/authentication/*' element={!isAuthentication ? <Authentication/> : <Navigate to='/'/>} />
+        <Route path='/myevents/*' element={<PrivateRoute Component={MyEvents}/>}/>
      </Routes>
     </BrowserRouter>
     

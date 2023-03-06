@@ -31,10 +31,9 @@ export default function Navbar() {
 
 
 
-   const {state, dispatch} = useContext(AuthContext)
+   const {isAuthentication, dispatch} = useContext(AuthContext)
 
-   const {isAuthentication} = state
-  
+    
 
    const handleLogout = () =>{
     

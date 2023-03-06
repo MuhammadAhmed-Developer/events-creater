@@ -24,7 +24,7 @@ export default function Hero() {
                  </div>
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12 mt-5 text-sm-center text-lg-end">
-            <img src={eventimg} alt="event" className='img-fluid mt-3 ms-lg-4' />
+            <img src={eventimg} alt="event" className='img-fluid mt-3 ms-lg-4 img-animate  ' />
           </div>
         </div>
       </div>

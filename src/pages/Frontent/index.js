@@ -6,6 +6,7 @@ import Home from './Home'
 import Events from './Events/Events'
 import Contact from './Contact/Contact'
 import MyEvents from './MyEvents/MyEvents'
+import SeeEvents from './SeeEvents/SeeEvents'
 
 export default function index() {
   return (
@@ -18,6 +19,7 @@ export default function index() {
             <Route path='/events' element={<Events/>}/>
             <Route path='/contact' element={<Contact/>}/>
             <Route path='/myevents' element={<MyEvents/>}/>
+            <Route path='/seeevents' element={<SeeEvents/>}/>
 
         </Route>
     </Routes>

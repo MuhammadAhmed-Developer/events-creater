@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate} from 'react-router-dom'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import {auth} from '../../../Config/firebase'
 import { firestore } from '../../../Config/firebase'
 import { doc, setDoc } from 'firebase/firestore/lite'
+import { AuthContext } from '../../../context/AuthContext'
 
 
 const initialstate = {
@@ -14,7 +15,7 @@ const initialstate = {
 
 export default function SignUp() {
 
-
+const {dispatch} = useContext(AuthContext)
   const navigate = useNavigate()
   const[state, setState] = useState(initialstate)
   const [isProcessing, setIsProcesssing] = useState(false)
@@ -52,10 +53,11 @@ export default function SignUp() {
   const addProfile= async (user)=>{
     try{
       await setDoc(doc(firestore, "users", user.uid), {
-        name: state.displayName,
+        displayName: state.displayName,
         email,
         uid: user.uid
       });
+      dispatch({type:"LOGIN", payload:{user}})
       console.log('user Document created at firestore' )
     }catch(err){
        console.log(err)

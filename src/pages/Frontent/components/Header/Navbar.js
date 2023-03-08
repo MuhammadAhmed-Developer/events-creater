@@ -70,6 +70,9 @@ export default function Navbar() {
         <li className="nav-item">
           <Link to='/contact' className="nav-link me-4" href="#">Contact</Link>
         </li>
+        <li className="nav-item">
+          <Link to='/seeevents' className="nav-link me-4" href="#">See Events</Link>
+        </li>
         <li className="nav-item ">
           {!isAuthentication ?  <></>
           : 

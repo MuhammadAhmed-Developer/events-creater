@@ -34,7 +34,7 @@ export default function AuthContextProvider(props) {
           // ...
         }
       })
-    })
+    }, [])
 
   return (
     <AuthContext.Provider value={{...state, dispatch}}>

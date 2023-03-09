@@ -30,8 +30,7 @@ export default function Events() {
           </div>
         </div>
       </div>
-      {/* Nearby Events */}
-      <div className="container">
+      <div className="container ">
         <div className="row">
           <div className="col-12 text-center">
             <h1 className="fw-bold text-warning">
@@ -39,7 +38,7 @@ export default function Events() {
 
             </h1>
           </div>
-        </div>
+         </div>
       </div>
 
     </>

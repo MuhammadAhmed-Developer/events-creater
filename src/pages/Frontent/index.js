@@ -10,7 +10,7 @@ import MyEvents from './MyEvents/MyEvents'
 export default function index() {
   return (
     <>
-    <Header/>
+    {/* <Header/> */}
     <main>
       <Routes>
         <Route path='/'>
@@ -18,11 +18,10 @@ export default function index() {
             <Route path='/events' element={<Events/>}/>
             <Route path='/contact' element={<Contact/>}/>
             <Route path='/myevents' element={<MyEvents/>}/>
-
         </Route>
     </Routes>
     </main>
-    <Footer/>
+    {/* <Footer/> */}
     </>
   )
 }

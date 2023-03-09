@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Footer() {
 
@@ -11,17 +12,17 @@ export default function Footer() {
             <div className="col-lg-4 col-md-4 col-sm-6 ">
                 <ul className=''>
                   <h3 className='fw-bold mb-5'>Follow Us</h3>
-                    <li className='mb-4'><a href="" target='_blank' className='text-decoration-none text-white'>Facebook</a></li>
-                    <li className='mb-4'><a href="" target='_blank' className='text-decoration-none text-white'>Twitter</a></li>
-                    <li className='mb-4'><a href="" target='_blank' className='text-decoration-none text-white'>Instagram</a></li>
-                    <li className='mb-4'><a href="" target='_blank' className='text-decoration-none text-white'>Youtube</a></li>
+                    <li className='mb-4'><a href="https://www.facebook.com/MuhammadAhmedjee" target='_blank' className='text-decoration-none text-white'>Facebook</a></li>
+                    <li className='mb-4'><a href="https://twitter.com/Muhammad__1122" target='_blank' className='text-decoration-none text-white'>Twitter</a></li>
+                    <li className='mb-4'><a href="https://www.instagram.com/muhammad_ahmed0011/" target='_blank' className='text-decoration-none text-white'>Instagram</a></li>
+                    <li className='mb-4'><a href="https://www.youtube.com/channel/UCaLHw5befr8haWH_XQQVOvA" target='_blank' className='text-decoration-none text-white'>Youtube</a></li>
                 </ul>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-6 ">
                 <ul className=''>
                   <h3 className='fw-bold mb-5'>Links</h3>
-                    <li className='mb-4'><a href="" target='_blank' className='text-decoration-none text-white'>Schedule</a></li>
-                    <li className='mb-4'><a href="" target='_blank' className='text-decoration-none text-white'>Contact</a></li>
+                    <li className='mb-4'><Link to='/events'  className='text-decoration-none text-white'>Schedule</Link></li>
+                    <li className='mb-4'><Link to='/contact' className='text-decoration-none text-white'>Contact</Link></li>
                   
                     
                 </ul>

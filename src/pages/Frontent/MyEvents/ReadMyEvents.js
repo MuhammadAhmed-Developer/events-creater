@@ -20,7 +20,7 @@ export default function ReadMyEvents() {
     const [isLoading, setIsLoading] = useState(true)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [Documents, setDocuments] = useState({})
-    const [state, setState] = useState(initialState);
+    // const [state, setState] = useState(initialState);
 
     const [events, setEvents] = useState([])
 
@@ -129,8 +129,8 @@ export default function ReadMyEvents() {
                                                 <Td>{events.time}</Td>
                                                 <Td>{events.date}</Td>
 
-                                                <Td><button type="button" class="btn btn-info btn-sm  mb-lg-0 mb-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>{setEvents(events)}}>
-                                                    Edit</button> <button className='btn btn-danger btn-sm' disabled={isLoadingDelete} onClick={() => { handleDelete(events) }}>
+                                                <Td className=''><button type="button" className="btn btn-info btn-sm  mb-lg-0 mb-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={()=>{setEvents(events)}}>
+                                                    Edit</button> <button className='my-1 btn btn-danger btn-sm' disabled={isLoadingDelete} onClick={() => { handleDelete(events) }}>
                                                         {!isLoadingDelete ? 'Delete' : <div className='spinner-border spinner-border-sm'></div>}
                                                     </button></Td>
                                             </Tr>
@@ -146,19 +146,19 @@ export default function ReadMyEvents() {
                 </div>
             </div>
             {/* <!-- Button trigger modal --> */}
-            {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button> */}
 
             {/* <!-- Modal --> */}
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Event</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Event</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div className="modal-body">
                            <div className="row">
                              <div className="col">
                              <div className="row mb-3">
@@ -188,9 +188,9 @@ export default function ReadMyEvents() {
                              </div>
                            </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={handleUpdated}>{!isLoading ? 'Save Changes' : <div className='spinner-border spinner-border-sm'></div>}</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleUpdated}>{!isLoading ? 'Save Changes' : <div className='spinner-border spinner-border-sm'></div>}</button>
                         </div>
                     </div>
                 </div>

@@ -53,7 +53,7 @@ const {dispatch} = useContext(AuthContext)
   const addProfile= async (user)=>{
     try{
       await setDoc(doc(firestore, "users", user.uid), {
-        // name: state.displayName,
+        name: state.displayName,
         email:user.email,
         uid: user.uid
       });

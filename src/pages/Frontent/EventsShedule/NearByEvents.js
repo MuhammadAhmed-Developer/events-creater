@@ -50,7 +50,7 @@ export default function NearByEvents() {
     }, [])
 
     const handleJoin = () =>{
-      
+      alert('Congratulations! 🎉 please come on time, Thanks You 🤗')
     }
 
   return (
@@ -58,7 +58,7 @@ export default function NearByEvents() {
     <div className="row">
         <div className="col">
             <div className='card shadow p-lg-4 p-md-3 p-sm-2 m-4'>
-                    <Table className='table-bordered text-center table-info table-responsive'>
+                    <Table className='table-bordered text-center table-danger table-responsive'>
                         <Thead>
                             <Tr>
                                 <Th>Sr.No</Th>

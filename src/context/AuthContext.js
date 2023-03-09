@@ -6,7 +6,9 @@ import { auth, firestore } from '../Config/firebase';
 export const AuthContext = createContext()
 
 const initialState = {isAuthentication: false }
+
 const reducer = ((state, action)=>{
+
 switch (action.type){
  case "LOGIN":
  return {isAuthentication: true, user: action.payload.user}
@@ -17,7 +19,7 @@ default:
 }
 })
 export default function AuthContextProvider(props) {
-  const [user, setUser] = useState({})
+  // const [user, setUser] = useState({})
     const [state, dispatch] = useReducer(reducer, initialState)
 
 
@@ -27,8 +29,9 @@ export default function AuthContextProvider(props) {
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
           const uid = user.uid;
+          // console.log(uid)
           console.log('User is signed In')
-          readUserData(user)
+          // readUserData(user)
 
           // ...
           dispatch({type:"LOGIN", payload:{user}})
@@ -38,25 +41,25 @@ export default function AuthContextProvider(props) {
         }
       })
     }, [])
-    const readUserData = async (user) => {
+    // const readUserData = async (user) => {
 
-      const docRef = doc(firestore, "users", user.uid);
-      const docSnap = await getDoc(docRef);
+    //   const docRef = doc(firestore, "users", user.uid);
+    //   const docSnap = await getDoc(docRef);
   
-      if (docSnap.exists()) {
-        // console.log("Document data:", docSnap.data());
-        let userData = docSnap.data()
-        setUser(userData)
-        // console.log("userData =>", userData)
-        dispatch({ type: "LOGIN", payload: { user } });
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    }
+    //   if (docSnap.exists()) {
+    //     // console.log("Document data:", docSnap.data());
+    //     let userData = docSnap.data()
+    //     setUser(userData)
+    //     // console.log("userData =>", userData)
+    //     dispatch({ type: "LOGIN", payload: { user } });
+    //   } else {
+    //     // doc.data() will be undefined in this case
+    //     console.log("No such document!");
+    //   }
+    // }
 
   return (
-    <AuthContext.Provider value={{...state, dispatch, user}}>
+    <AuthContext.Provider value={{...state, dispatch}}>
      {props.children}
     </AuthContext.Provider>
   )

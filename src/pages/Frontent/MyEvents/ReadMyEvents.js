@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { collection, doc, getDocs, query, where } from 'firebase/firestore/lite'
+import { collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore/lite'
 import { firestore } from '../../../Config/firebase'
 import { AuthContext } from '../../../context/AuthContext';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import { async } from '@firebase/util';
 
 const initialState = {
     description: '',
@@ -15,14 +16,19 @@ const initialState = {
 
 export default function ReadMyEvents() {
 
-    const  [isLoading, setIsLoading ] = useState(true)
     const { user } = useContext(AuthContext)
+    const  [isLoading, setIsLoading ] = useState(true)
+    const  [isLoadingDelete, setIsLoadingDelete ] = useState(false)
     const  [Documents, setDocuments]  = useState([])
     const [state, setState] = useState(initialState);
 
+    // const handleChange = e => {
+    //     setTodo(s => ({ ...s, [e.target.name]: e.target.value }))
+    //   }
+
     const fetchDocument = async () => {
         let array = []
-        const q = query(collection(firestore, "events"), where("createdBy.uid", "==", 'user.uid'));
+        const q = query(collection(firestore, "events"), where("createdBy.uid", "==", user.uid));
         // console.log(user)
         // console.log(user.uid)
         // return
@@ -40,21 +46,42 @@ export default function ReadMyEvents() {
         fetchDocument()
     }, [user])
 
+
+    const handleDelete = async (events) => {
+        setIsLoadingDelete(true)
+      
+        try{
+            await deleteDoc(doc(firestore, "events",  events.id));
+window.notify('Event has been Deleted', 'success')
+let newDocuments = Documents.filter((doc)=>{
+   return doc.id !== events.id
+})
+setDocuments(newDocuments)
+
+        }catch(err){
+            console.log(err)
+            window.notify('Something went wrong', 'error')
+        }
+
+
+        setIsLoadingDelete(false)
+    }
+
     return (
         <>
-            <div className="container mt-3">
+            <div className="container-fluid mt-3">
                 <div className="row">
                     <div className="col">
-                        <div className='card p-lg-4 p-md-3 p-sm-2 m-4'>
+                        <div className='card shadow p-lg-4 p-md-3 p-sm-2 m-4'>
                            {!isLoading ?
-                            <Table>
+                            <Table className='table-bordered text-center table-info table-responsive'>
                             <Thead>
                                 <Tr>
                                     <Th>Sr.No</Th>
                                     <Th>Description</Th>
                                     <Th>Title</Th>
                                     <Th>Location</Th>
-                                    <Th>Price</Th>
+                                    <Th>Ticket Price</Th>
                                     <Th>Time</Th>
                                     <Th>Date</Th>
                                     <Th>Action</Th>
@@ -71,7 +98,9 @@ export default function ReadMyEvents() {
                                     <Td>{events.time}</Td>
                                     <Td>{events.date}</Td>
                                     
-                                    <Td><button className='btn btn-info btn-sm me-2'>Edit</button> <button className='btn btn-danger btn-sm'>Delete</button></Td>
+                                    <Td><button className='btn btn-info btn-sm me-2 mb-md-2 mb-lg-0'>Edit</button> <button className='btn btn-danger btn-sm' disabled={isLoadingDelete} onClick={() => { handleDelete(events) }}>
+                                        {!isLoadingDelete ? 'Delete': <div className='spinner-border spinner-border-sm'></div>}
+                                        </button></Td>
                                 </Tr>
                                 })}
                                

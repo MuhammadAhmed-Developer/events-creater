@@ -54,7 +54,7 @@ const handleSubmit = (e) =>{
 if(!isAuthentication){
   return window.notify('Please Sign Up!', 'error')
 }
-  let eventData = {description,title,price,location,time,date:[]}
+  let eventData = {description,title,price,location,time,date}
 
   eventData.dateCreated = serverTimestamp()
   eventData.id= Math.random().toString(36).slice(2);
@@ -62,7 +62,7 @@ if(!isAuthentication){
     
     email: user.email,
     uid:user.uid,
-    displayName: user.displayName
+    // displayName: user.name
   }
 
   createEvent(eventData)
@@ -75,13 +75,13 @@ try{
   await setDoc(doc(firestore, "events", eventData.id), eventData);
   window.notify('Event has been sucessfully added', 'success')
 }catch(err){
-  window.notify("Something went went wrong, Event isn't added.", "error")
+  window.notify("Something went  wrong, Event isn't added.", "error")
   console.log(err)
 }
 
  setIsProcesssing(false)
  
- console.log(createEvent())
+//  console.log(createEvent())
  
 }
 

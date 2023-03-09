@@ -53,12 +53,12 @@ const {dispatch} = useContext(AuthContext)
   const addProfile= async (user)=>{
     try{
       await setDoc(doc(firestore, "users", user.uid), {
-        name: state.displayName,
-        email,
+        // name: state.displayName,
+        email:user.email,
         uid: user.uid
       });
-      dispatch({type:"LOGIN", payload:{user}})
       console.log('user Document created at firestore' )
+      dispatch({type:"LOGIN", payload:{user}})
     }catch(err){
        console.log(err)
        window.notify("Something went wrong", 'error')

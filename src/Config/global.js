@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 window.notify= (msg, type)=>{
  
 const options = {
-    position: "bottom-left",
+    position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

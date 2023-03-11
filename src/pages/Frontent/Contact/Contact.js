@@ -20,8 +20,27 @@ export default function Contact() {
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    console.log(state)
-   window.notify("Workin", "success")
+    let {query, name, email,subject}= state
+    query = query.trim()
+    name= name.trim()
+    email= email.trim()
+    subject= subject.trim()
+
+    if(query.length < 10){
+       return window.notify('Please Enter Query Correctly', 'error')
+    }
+    if(name.length<3){
+    return window.notify('Please Enter Name', 'error')
+    }
+    if(email.length<7){
+    return window.notify('Please Enter Email', 'error')
+    }
+    if(subject.length<3){
+    return window.notify('Please Enter Subject', 'error')
+    }
+        console.log(state)
+  window.notify('Thanks For Contact', 'success') 
+
   }
 
   return (
